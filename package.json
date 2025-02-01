@@ -23,7 +23,9 @@
       "eject": "react-scripts eject",
       "predeploy": "npm run build",
       "deploy": "npx gh-pages -d build"
-
+    },
+    "resolutions": {
+      "@babel/plugin-proposal-private-property-in-object": "7.21.11"
     },
     "eslintConfig": {
       "extends": [
