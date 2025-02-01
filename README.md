@@ -1,2 +1,2 @@
-# fashion-mus-frontend
+# fashion-muse-frontend
 fashion-muse-frontend
