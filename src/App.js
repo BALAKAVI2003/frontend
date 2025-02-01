@@ -1,21 +1,15 @@
-import React, { useEffect, useRef } from 'react';
-import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
+import React from 'react';
+import AvatarOutfitSelection from './components/AvatarOutfitSelection'; // Import the new component
+import './App.css';
 
-const AvatarCanvas = ({ bodyModel, outfitModel }) => {
-  const meshRef = useRef();
-
-  useEffect(() => {
-    // Logic to load the models using three.js here (GLTFLoader, etc.)
-    console.log(bodyModel, outfitModel);  // Check if models are passed correctly
-  }, [bodyModel, outfitModel]);
-
+function App() {
   return (
-    <mesh ref={meshRef}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="hotpink" />
-    </mesh>
+    <div className="App">
+      <h1>Fashion Muse Avatar Selection</h1>
+      {/* Display the AvatarOutfitSelection component */}
+      <AvatarOutfitSelection />
+    </div>
   );
-};
+}
 
-export default AvatarCanvas;
+export default App;

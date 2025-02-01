@@ -1,33 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { useLoader } from '@react-three/fiber';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { useFrame } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'; // Import GLTFLoader
 
 const AvatarCanvas = ({ bodyModel, outfitModel }) => {
-  const body = useLoader(GLTFLoader, bodyModel);
-  const outfit = useLoader(GLTFLoader, outfitModel);
-
+  const [bodyMesh, setBodyMesh] = useState(null);
+  const [outfitMesh, setOutfitMesh] = useState(null);
   const meshRef = useRef();
-  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    if (body && outfit) {
-      setLoaded(true);
-    }
-  }, [body, outfit]);
+    const loader = new GLTFLoader();
+
+    // Load body model
+    loader.load(bodyModel, (gltf) => {
+      setBodyMesh(gltf.scene);  // Set the loaded body model
+    });
+
+    // Load outfit model
+    loader.load(outfitModel, (gltf) => {
+      setOutfitMesh(gltf.scene);  // Set the loaded outfit model
+    });
+  }, [bodyModel, outfitModel]);
+
+  useFrame(() => {
+    // You can animate the models here if you need
+  });
 
   return (
-    <mesh ref={meshRef}>
-      {loaded ? (
-        <>
-          {/* Render body and outfit models here */}
-          <primitive object={body.scene} />
-          <primitive object={outfit.scene} />
-        </>
-      ) : (
-        <meshStandardMaterial color="grey" />
-      )}
-    </mesh>
+    <group ref={meshRef}>
+      {bodyMesh && <primitive object={bodyMesh} />}
+      {outfitMesh && <primitive object={outfitMesh} />}
+    </group>
   );
 };
 

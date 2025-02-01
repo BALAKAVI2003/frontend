@@ -1,0 +1,20 @@
+/* Example CSS for AvatarOutfitSelection component */
+#avatar-setup,
+#outfit-setup,
+#final-setup {
+  margin: 20px;
+}
+
+.avatar,
+.outfit {
+  margin: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#avatar-display {
+  margin-top: 20px;
+}
