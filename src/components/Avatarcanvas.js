@@ -1,17 +1,34 @@
-import React from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
+import React, { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-export const AvatarCanvas = () => {
+const AvatarCanvas = ({ bodyModel, outfitModel }) => {
+  const body = useLoader(GLTFLoader, bodyModel);
+  const outfit = useLoader(GLTFLoader, outfitModel);
+
+  const meshRef = useRef();
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (body && outfit) {
+      setLoaded(true);
+    }
+  }, [body, outfit]);
+
   return (
-    <Canvas>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <mesh>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="hotpink" />
-      </mesh>
-      <OrbitControls />
-    </Canvas>
+    <mesh ref={meshRef}>
+      {loaded ? (
+        <>
+          {/* Render body and outfit models here */}
+          <primitive object={body.scene} />
+          <primitive object={outfit.scene} />
+        </>
+      ) : (
+        <meshStandardMaterial color="grey" />
+      )}
+    </mesh>
   );
 };
+
+export default AvatarCanvas;

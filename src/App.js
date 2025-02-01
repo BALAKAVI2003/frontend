@@ -1,26 +1,21 @@
-import React from 'react';
-import { AvatarCanvas } from './components/AvatarCanvas';
-import './App.css';
+import React, { useEffect, useRef } from 'react';
+import * as THREE from 'three';
+import { useFrame } from '@react-three/fiber';
 
-// Optionally, you can define the dummy data outside the component:
-const dummyBodyTypes = [{ _id: '1', name: 'Athletic', modelPath: '/models/body1.glb' }];
-const dummyOutfits = [{ _id: '1', name: 'Casual Shirt', modelPath: '/models/outfit1.glb' }];
+const AvatarCanvas = ({ bodyModel, outfitModel }) => {
+  const meshRef = useRef();
 
-function App() {
-  // Alternatively, define them here if you want them scoped to the component:
-  // const dummyBodyTypes = [{ _id: '1', name: 'Athletic', modelPath: '/models/body1.glb' }];
-  // const dummyOutfits = [{ _id: '1', name: 'Casual Shirt', modelPath: '/models/outfit1.glb' }];
+  useEffect(() => {
+    // Logic to load the models using three.js here (GLTFLoader, etc.)
+    console.log(bodyModel, outfitModel);  // Check if models are passed correctly
+  }, [bodyModel, outfitModel]);
 
   return (
-    <div className="App">
-      <h1>Test Avatar Canvas</h1>
-      {/* Pass the modelPath values to AvatarCanvas as props */}
-      <AvatarCanvas 
-        bodyModel={dummyBodyTypes[0].modelPath} 
-        outfitModel={dummyOutfits[0].modelPath} 
-      />
-    </div>
+    <mesh ref={meshRef}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="hotpink" />
+    </mesh>
   );
-}
+};
 
-export default App;
+export default AvatarCanvas;
