@@ -1,6 +1,7 @@
 {
     "name": "frontend",
     "version": "1.0.0",
+    "homepage": "https://BALAKAVI2003.github.io/frontend",
     "private": true,
     "dependencies": {
         "@react-three/drei": "^9.77.5",
@@ -47,6 +48,7 @@
     },
     "devDependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+        "gh-pages": "^6.3.0",
         "npm-force-resolutions": "^0.0.10"
     }
 }
