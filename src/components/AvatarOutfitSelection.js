@@ -1,80 +1,92 @@
-import React, { useState } from 'react';
-import './AvatarOutfitSelection.css'; // Custom styles for this component
+// src/components/AvatarOutfitSelection.js
+import React, { useState, useRef } from "react";
+import PropTypes from "prop-types";
+import "./AvatarOutfitSelection.css";
 
-// Placeholder paths for avatar and outfit models
-const avatars = {
-  avatar1: '/models/male_model_design.gltf',
-  avatar2: '/models/male_model_design2.gltf',
-  avatar3: '/models/male_model_design3.gltf'
-};
-
-const outfits = {
-  outfit1: '/models/outfit1.gltf',
-  outfit2: '/models/outfit2.gltf',
-  outfit3: '/models/outfit3.gltf'
-};
-
-function AvatarOutfitSelection() {
+function AvatarOutfitSelection({ scrollToHome }) {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
   const [selectedOutfit, setSelectedOutfit] = useState(null);
-  const [showOutfitSelection, setShowOutfitSelection] = useState(false);
+  const outfitSectionRef = useRef(null);
+  const finalSectionRef = useRef(null);
 
-  // Show avatar selection
-  const showAvatarSetup = () => {
-    return (
-      <div id="avatar-setup">
-        <h2>Select Your Avatar</h2>
-        <button className="avatar" onClick={() => handleSelectAvatar('avatar (1)')}>Avatar 1</button>
-        <button className="avatar" onClick={() => handleSelectAvatar('avatar (2)')}>Avatar 2</button>
-        <button className="avatar" onClick={() => handleSelectAvatar('avatar (3)')}>Avatar 3</button>
-      </div>
-    );
+  const avatars = [
+    { id: "1", name: "Athletic", imagePath: process.env.PUBLIC_URL + "/images/avatar1.png" },
+    { id: "2", name: "Casual", imagePath: process.env.PUBLIC_URL + "/images/avatar2.png" },
+    { id: "3", name: "Slim", imagePath: process.env.PUBLIC_URL + "/images/avatar3.png" },
+  ];
+  const outfits = [
+    { id: "1", name: "Casual Shirt", imagePath: process.env.PUBLIC_URL + "/images/outfit1.png" },
+    { id: "2", name: "T-shirt", imagePath: process.env.PUBLIC_URL + "/images/outfit2.png" },
+    { id: "3", name: "Jacket", imagePath: process.env.PUBLIC_URL + "/images/outfit3.png" },
+  ];
+
+  const handleAvatarSelection = (avatar) => {
+    setSelectedAvatar(avatar);
+    setSelectedOutfit(null);
+    setTimeout(() => {
+      outfitSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
-  // Handle avatar selection
-  const handleSelectAvatar = (avatarId) => {
-    setSelectedAvatar(avatars[avatarId]);
-    setShowOutfitSelection(true);
-  };
-
-  // Show outfit selection
-  const showOutfitSetup = () => {
-    return (
-      <div id="outfit-setup">
-        <h2>Select Your Outfit</h2>
-        <button className="outfit" onClick={() => handleSelectOutfit('outfit1')}>Outfit 1</button>
-        <button className="outfit" onClick={() => handleSelectOutfit('outfit2')}>Outfit 2</button>
-        <button className="outfit" onClick={() => handleSelectOutfit('outfit3')}>Outfit 3</button>
-      </div>
-    );
-  };
-
-  // Handle outfit selection
-  const handleSelectOutfit = (outfitId) => {
-    setSelectedOutfit(outfits[outfitId]);
-    displayFinalAvatarWithOutfit();
-  };
-
-  // Display the final avatar wearing the selected outfit
-  const displayFinalAvatarWithOutfit = () => {
-    return (
-      <div id="final-setup">
-        <h2>Your Selected Avatar Wearing Outfit</h2>
-        <div id="avatar-display">
-          <h3>Avatar Model: {selectedAvatar}</h3>
-          <h3>Outfit Model: {selectedOutfit}</h3>
-          {/* Here you can render the 3D model if needed */}
-        </div>
-      </div>
-    );
+  const handleOutfitSelection = (outfit) => {
+    setSelectedOutfit(outfit);
+    setTimeout(() => {
+      finalSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   };
 
   return (
-    <div>
-      {showOutfitSelection ? showOutfitSetup() : showAvatarSetup()}
-      {selectedAvatar && selectedOutfit && displayFinalAvatarWithOutfit()}
+    <div className="avatar-outfit-selection">
+      <h2>Select Your Avatar and Outfit</h2>
+
+      {!selectedAvatar && (
+        <div className="avatar-selection">
+          {avatars.map((avatar) => (
+            <button
+              key={avatar.id}
+              onClick={() => handleAvatarSelection(avatar)}
+              className="selection-button"
+            >
+              <img src={avatar.imagePath} alt={avatar.name} className="selection-image" />
+              <span>{avatar.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {selectedAvatar && !selectedOutfit && (
+        <div className="outfit-selection" ref={outfitSectionRef}>
+          {outfits.map((outfit) => (
+            <button
+              key={outfit.id}
+              onClick={() => handleOutfitSelection(outfit)}
+              className="selection-button"
+            >
+              <img src={outfit.imagePath} alt={outfit.name} className="selection-image" />
+              <span>{outfit.name}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {selectedAvatar && selectedOutfit && (
+        <div className="final-selection" ref={finalSectionRef}>
+          <h3>Your Avatar Wearing the Selected Outfit</h3>
+          <div className="final-display">
+            <img src={selectedAvatar.imagePath} alt="Avatar" className="base-avatar" />
+            <img src={selectedOutfit.imagePath} alt="Outfit" className="overlay-outfit" />
+          </div>
+          <button className="exit-avatar" onClick={scrollToHome}>
+            Exit
+          </button>
+        </div>
+      )}
     </div>
   );
 }
+
+AvatarOutfitSelection.propTypes = {
+  scrollToHome: PropTypes.func.isRequired,
+};
 
 export default AvatarOutfitSelection;

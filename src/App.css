@@ -1,12 +1,105 @@
-.App {
+/* src/App.css */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to right, #004d40, #00897b);
+  color: white;
   text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
-canvas {
+/* Navbar Styling */
+.navbar {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
   width: 100%;
-  height: 100%;
+  z-index: 1000;
+}
+
+.navbar h1 {
+  margin-left: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: gold;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin-right: 20px;
+}
+
+.navbar ul li {
+  margin: 0 15px;
+}
+
+.navbar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: gold;
+}
+
+/* Home Page Styling */
+.home {
+  margin-top: 80px;
+}
+
+.home h2 {
+  font-size: 36px;
+  font-weight: bold;
+  color: gold;
+  text-shadow: 2px 2px 4px black;
+}
+
+.home p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.button-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.home-button {
+  background: gold;
+  color: black;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 5px;
+}
+
+.home-button:hover {
+  background: #ffcc00;
+  transform: scale(1.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .button-section {
+    flex-direction: column;
+  }
+
+  .navbar {
+    flex-direction: column;
+  }
+
+  .navbar ul {
+    margin-top: 10px;
+  }
 }

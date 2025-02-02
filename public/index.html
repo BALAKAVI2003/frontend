@@ -7,21 +7,61 @@
     <title>Fashion Muse Avatar</title>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
     <!-- Disable interest-cohort (FLoC) -->
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
-  </head>
-  <body>
-    <!-- Link to your favicon -->
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <!-- Link to your manifest file (if you have one) -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!-- Optionally, add a meta description for SEO -->
+    <meta http-equiv="Permissions-Policy" content="interest-cohort=()" />
     <meta name="description" content="Fashion Muse Avatar - Create and style your 3D avatar." />
+
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700"
+    />
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(45deg, #ff7f50, #ff1493);
+        color: white;
+        text-align: center;
+      }
+      h1,
+      p {
+        margin: 20px 0;
+      }
+      .button {
+        background-color: #ff1493;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      .button:hover {
+        background-color: #ff7f50;
+      }
+      #root {
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
     <!-- Fallback message if JavaScript is disabled -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+
+    <div id="root">
+      <h1>Fashion Muse Avatar</h1>
+      <p>Your Style, Your Rules</p>
+      <button class="button" onclick="alert('Style Recommendations')">Style Recommendations</button>
+      <button class="button" onclick="alert('Avatar Setup')">Avatar Setup</button>
+      <button class="button" onclick="alert('Own Style Preferences')">Own Style Preferences</button>
+    </div>
   </body>
 </html>
-

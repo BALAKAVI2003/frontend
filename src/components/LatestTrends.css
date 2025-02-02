@@ -1,0 +1,29 @@
+/* src/components/LatestTrends.css */
+.trends-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.trend-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.trend-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid gold;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.trend-card:hover {
+  background: gold;
+  transform: scale(1.1);
+}
+
+.trend-card img {
+  width: 120px;
+  height: auto;
+  border-radius: 5px;
+}
